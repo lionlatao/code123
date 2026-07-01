@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
       : s.icon === "fa-discord"
   ? `<a href="javascript:void(0)"
         onclick="
-          window.location.href='discord://-/users/1516408784434626642';
+          window.location.href='discord://-/users/1161189696051892274';
           setTimeout(function(){
-            window.open('https://discord.com/users/1516408784434626642','_blank');
+            window.open('https://discord.com/users/1161189696051892274','_blank');
           },1000);
         ">
         <i class="fab fa-discord"></i>
