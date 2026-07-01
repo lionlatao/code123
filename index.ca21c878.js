@@ -1,0 +1,85 @@
+document.addEventListener("DOMContentLoaded", function () {
+  
+   const avatars = [
+    "avatar1.gif",
+    "avatar2.gif", 
+    "avatar3.gif",
+    "avatar4.gif",
+    "avatar5.gif"
+  ];
+  
+  // Chọn ảnh ngẫu nhiên
+    const defaultAvatar = avatars[4];
+  const data = {
+   
+    name: "thái tử seoul",
+    avatar: defaultAvatar,
+    desc: "2011, đếch biết sợ và thích bị ăn đòn.",
+    social: [
+      { icon: "fa-facebook-f", link: "https://www.facebook.com/liongking206/" },
+      { icon: "fa-instagram", link: "https://www.instagram.com/lionlataoo/" },
+      { icon: "fa-comment-dots", link: "https://ngl.link/lionlataoo", },  // Có icon + chữ ngl
+      { icon: "fa-tiktok", link: "https://www.tiktok.com/@lionhaybuon" },
+      { icon: "fa-discord", link:  "https://discord.com/users/1516408784434626642" },
+      { type: "info", icon: "fa-info-circle", link: "#" }
+    ]
+  };
+
+  document.title = data.name;
+
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
+  <div class="wrap">
+    <div class="container">
+      <div class="home">
+        <div class="avatar">
+          <div class="image"></div>
+        </div>
+        <div class="details">
+          <h3 class="name">${data.name}</h3>
+          <p class="excerpt">${data.desc}</p>
+          <ul class="social">
+            ${data.social.map(s => `
+  <li>
+    ${s.type === "info" 
+      ? `<a href="javascript:void(0)" class="info-btn" onclick="toggleInfoPanel()">
+          <i class="fas fa-info-circle"></i>
+         </a>`
+      : s.type === "copy"
+        ? `<a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">
+                      <i class="fab fa-discord"></i>
+                     </a>`
+      : s.icon === "fa-discord"
+  ? `<a href="javascript:void(0)"
+        onclick="
+          window.location.href='discord://-/users/1516408784434626642';
+          setTimeout(function(){
+            window.open('https://discord.com/users/1516408784434626642','_blank');
+          },1000);
+        ">
+        <i class="fab fa-discord"></i>
+     </a>`
+  : `<a href="${s.link}" target="_blank">
+      <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
+      ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
+     </a>`
+    }
+  </li>
+`).join("")}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+  // Set avatar
+  const avatarImage = document.querySelector(".avatar .image");
+  if (avatarImage) {
+    avatarImage.style.backgroundImage = `url('${data.avatar}')`;
+    avatarImage.style.backgroundSize = "cover";
+    avatarImage.style.backgroundPosition = "center";
+    avatarImage.style.backgroundRepeat = "no-repeat";
+  }
+});
